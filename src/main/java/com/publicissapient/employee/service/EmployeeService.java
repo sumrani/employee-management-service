@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.publicissapient.employee.model.Employee;
@@ -25,12 +25,6 @@ public class EmployeeService {
 		employeeRepository.save(employee);
 	}
 	
-
-	public List<Employee> getEmplByNameAndDeptId() {
-	//	employeeRepository.fin
-		return null;
-	}
-
 	public void deleteEmployee(int id) {
 			employeeRepository.deleteById(id);
 	}
@@ -49,9 +43,9 @@ public class EmployeeService {
 		
 	}
 	
-	public Page<Employee> findPaginatedPage(int pageNo, int pageSize){
-		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
-		return this.employeeRepository.findAll(pageable);
+	public List<Employee> getEmployeeBynameAndDeptIdInPage(String name, int dept_id){
+		Pageable pageable = PageRequest.of(0, 2, Sort.by("name"));
+		return this.employeeRepository.findNameByDepartment(dept_id, name,pageable).getContent();
 	}
 
 }

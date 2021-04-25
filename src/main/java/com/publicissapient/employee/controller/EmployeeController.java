@@ -49,4 +49,11 @@ public class EmployeeController {
 		 
 	}
 	
+	@RequestMapping("/employee/{name}/department/{dept_id}/page")
+	public List<Employee> getEmployeeInPage(@PathVariable String name, @PathVariable int dept_id) {
+		
+		 return service.getEmployeeBynameAndDeptIdInPage(name, dept_id);
+		 
+	}
+	
 }

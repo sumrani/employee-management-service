@@ -2,7 +2,9 @@ package com.publicissapient.employee.service;
 
 
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -48,4 +50,8 @@ public class EmployeeService {
 		return this.employeeRepository.findNameByDepartment(dept_id, name,pageable).getContent();
 	}
 
+	public Optional<Employee> getEmployeeById(int id) {
+	Optional<Employee>optional = employeeRepository.findById(id);
+	return optional;
+	}
 }

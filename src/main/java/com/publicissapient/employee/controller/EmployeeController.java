@@ -1,5 +1,6 @@
 package com.publicissapient.employee.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.publicissapient.employee.exception.ResourceNotFoundException;
 import com.publicissapient.employee.model.Employee;
@@ -25,7 +27,11 @@ public class EmployeeController {
 	public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
 		
 		service.createEmployee(employee);
-		return new ResponseEntity<Employee>(HttpStatus.CREATED);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(employee.getId())
+                .toUri();
+		return  ResponseEntity.created(location).build();
 	}
 	
 	@RequestMapping("/employee")

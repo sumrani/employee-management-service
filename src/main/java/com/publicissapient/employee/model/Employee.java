@@ -64,8 +64,14 @@ public class Employee {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-	 
 	
-	
-
+	public Employee(int id, String name, double salary, String address, long phoneNumber, Department department) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.department = department;
+	}
 }
